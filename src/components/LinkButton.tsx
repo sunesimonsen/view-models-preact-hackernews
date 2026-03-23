@@ -17,5 +17,3 @@ export const LinkButton = memo(({ children, route, params }: LinkButtonProps) =>
     </a>
   );
 });
-
-LinkButton.displayName = "LinkButton";

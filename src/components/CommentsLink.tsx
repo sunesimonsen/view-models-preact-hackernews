@@ -17,5 +17,3 @@ export const CommentsLink = memo(({ story }: CommentsLinkProps) => {
     </LinkButton>
   );
 });
-
-CommentsLink.displayName = "CommentsLink";

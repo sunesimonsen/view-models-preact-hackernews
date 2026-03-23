@@ -6,5 +6,3 @@ export const Skeleton = memo(() => {
 
   return <div className="skeleton" style={{ width }} />;
 });
-
-Skeleton.displayName = "Skeleton";

@@ -16,5 +16,3 @@ export const LoadMore = memo(() => {
     </div>
   );
 });
-
-LoadMore.displayName = "LoadMore";

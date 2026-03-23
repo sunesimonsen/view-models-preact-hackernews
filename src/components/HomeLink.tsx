@@ -12,5 +12,3 @@ export const HomeLink = memo(() => {
     </a>
   );
 });
-
-HomeLink.displayName = "HomeLink";

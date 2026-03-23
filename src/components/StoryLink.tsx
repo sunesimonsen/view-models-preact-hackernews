@@ -18,5 +18,3 @@ export const StoryLink = memo(({ story }: StoryLinkProps) => {
     </a>
   );
 });
-
-StoryLink.displayName = "StoryLink";

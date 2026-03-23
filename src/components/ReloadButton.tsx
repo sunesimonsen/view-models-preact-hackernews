@@ -15,5 +15,3 @@ export const ReloadButton = memo(() => {
     </button>
   );
 });
-
-ReloadButton.displayName = "ReloadButton";

@@ -7,5 +7,3 @@ interface HtmlProps {
 export const Html = memo(({ html }: HtmlProps) => {
   return <span dangerouslySetInnerHTML={{ __html: html }} />;
 });
-
-Html.displayName = "Html";

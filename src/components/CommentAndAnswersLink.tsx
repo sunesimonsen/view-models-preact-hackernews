@@ -19,5 +19,3 @@ export const CommentAndAnswersLink = memo(
     );
   },
 );
-
-CommentAndAnswersLink.displayName = "CommentAndAnswersLink";

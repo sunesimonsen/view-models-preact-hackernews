@@ -21,5 +21,3 @@ export const StoryByline = memo(
     );
   },
 );
-
-StoryByline.displayName = "StoryByline";

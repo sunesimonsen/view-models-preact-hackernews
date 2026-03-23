@@ -10,8 +10,6 @@ export const StoryTitle = memo(({ children }: StoryTitleProps) => {
   return <div className="story-title">{children}</div>;
 });
 
-StoryTitle.displayName = "StoryTitle";
-
 interface StoryCardProps {
   children: ComponentChildren;
 }
@@ -26,8 +24,6 @@ export const StoryCard = memo(
   }),
 );
 
-StoryCard.displayName = "StoryCard";
-
 export const StoryPlaceholder = memo(() => {
   return (
     <StoryCard>
@@ -40,5 +36,3 @@ export const StoryPlaceholder = memo(() => {
     </StoryCard>
   );
 });
-
-StoryPlaceholder.displayName = "StoryPlaceholder";

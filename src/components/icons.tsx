@@ -20,5 +20,3 @@ export const ReloadIcon = memo((props: JSX.SVGAttributes<SVGSVGElement>) => {
     </svg>
   );
 });
-
-ReloadIcon.displayName = "ReloadIcon";

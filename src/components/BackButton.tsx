@@ -15,5 +15,3 @@ export const BackButton = memo(() => {
     </button>
   );
 });
-
-BackButton.displayName = "BackButton";
