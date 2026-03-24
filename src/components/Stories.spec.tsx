@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen, waitFor } from "@testing-library/preact";
+import { render, screen, waitFor, act } from "@testing-library/preact";
 import { Router } from "@nano-router/preact";
 import { createMemoryHistory } from "@nano-router/history";
 import { Stories } from "./Stories";
@@ -59,8 +59,7 @@ describe("Stories", () => {
     });
   });
 
-  it.skip("renders a Story component for each story id", async () => {
-    // TODO: Known issue with nested async view model updates in Preact test environment
+  it("renders a Story component for each story id", async () => {
     vi.mocked(api.fetchTopStoryIds).mockResolvedValue(["1", "2", "3"]);
     vi.mocked(api.fetchStory).mockImplementation((id) =>
       Promise.resolve(createStory({ id, title: `Story ${id}` }))
@@ -68,6 +67,11 @@ describe("Stories", () => {
     model = new HackerNewsModel(api);
 
     renderStories();
+
+    // Flush all pending microtasks to allow nested view model updates to resolve
+    await act(async () => {
+      await new Promise((r) => setTimeout(r, 0));
+    });
 
     await waitFor(() => {
       expect(screen.getByText("Story 1")).toBeInTheDocument();

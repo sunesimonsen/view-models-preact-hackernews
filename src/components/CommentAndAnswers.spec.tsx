@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen, waitFor } from "@testing-library/preact";
+import { render, screen, waitFor, act } from "@testing-library/preact";
 import { Router } from "@nano-router/preact";
 import { createMemoryHistory } from "@nano-router/history";
 import { CommentAndAnswers } from "./CommentAndAnswers";
@@ -56,10 +56,8 @@ describe("CommentAndAnswers", () => {
     });
   });
 
-  it.skip("renders the answers section", async () => {
-    // TODO: Known issue with nested async view model updates in Preact test environment
-    // The answer comment view model doesn't resolve properly in tests
-    const comment = createComment({ id: "parent", answers: ["a1"] });
+  it("renders the answers section", async () => {
+        const comment = createComment({ id: "parent", answers: ["a1"] });
     const answer = createComment({ id: "a1", text: "Answer text" });
 
     vi.mocked(api.fetchComment).mockImplementation((id) => {
@@ -70,6 +68,10 @@ describe("CommentAndAnswers", () => {
     model = new HackerNewsModel(api);
 
     renderCommentAndAnswers("parent");
+
+    await act(async () => {
+      await new Promise((r) => setTimeout(r, 0));
+    });
 
     await waitFor(() => {
       expect(screen.getByText("Answer text")).toBeInTheDocument();

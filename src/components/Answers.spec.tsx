@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen, waitFor } from "@testing-library/preact";
+import { render, screen, waitFor, act } from "@testing-library/preact";
 import { Router } from "@nano-router/preact";
 import { createMemoryHistory } from "@nano-router/history";
 import { Answers } from "./Answers";
@@ -59,8 +59,7 @@ describe("Answers", () => {
     expect(container.querySelector("ul")).not.toBeInTheDocument();
   });
 
-  it.skip("renders a Comment for each answer", async () => {
-    // TODO: Known issue with nested async view model updates in Preact test environment
+  it("renders a Comment for each answer", async () => {
     const parentComment = createComment({ id: "parent", answers: ["a1", "a2"] });
     const answer1 = createComment({ id: "a1", text: "First answer" });
     const answer2 = createComment({ id: "a2", text: "Second answer" });
@@ -75,6 +74,10 @@ describe("Answers", () => {
 
     renderAnswers("parent");
 
+    await act(async () => {
+      await new Promise((r) => setTimeout(r, 0));
+    });
+
     await waitFor(() => {
       expect(screen.getByText("First answer")).toBeInTheDocument();
     });
@@ -82,8 +85,7 @@ describe("Answers", () => {
     expect(screen.getByText("Second answer")).toBeInTheDocument();
   });
 
-  it.skip("passes showAnswersLink to each answer Comment", async () => {
-    // TODO: Known issue with nested async view model updates in Preact test environment
+  it("passes showAnswersLink to each answer Comment", async () => {
     const parentComment = createComment({ id: "parent", answers: ["a1"] });
     const answer = createComment({ id: "a1", text: "Answer text", answers: ["nested"] });
 
@@ -95,6 +97,10 @@ describe("Answers", () => {
     model = new HackerNewsModel(api);
 
     renderAnswers("parent");
+
+    await act(async () => {
+      await new Promise((r) => setTimeout(r, 0));
+    });
 
     await waitFor(() => {
       expect(screen.getByText("1 answers")).toBeInTheDocument();
